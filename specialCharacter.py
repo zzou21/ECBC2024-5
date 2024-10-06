@@ -1,4 +1,4 @@
-import json, csv
+import json, PyPDF2
 
 jsonContent = None
 decodeLibrary = {}

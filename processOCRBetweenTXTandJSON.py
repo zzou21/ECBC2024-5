@@ -21,5 +21,11 @@ if __name__ == "__main__":
 
     jsonV4 = "C:/Users/zz341/Desktop/ECBC2024-5/OCRJSON/Vol4StoreOCRPerPage.json"
     txtV4 = "C:/Users/zz341/Desktop/ECBC2024-5/OCRTXT/v4FullOCR.txt"
-    processOCRMachine = processOCRTXTJSON(jsonV4, txtV4)
+
+    jsonV3 = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json"
+    txtV3 = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRTXT/v3FullOCR.txt"
+
+    jsonV2 = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/Vol2StoreOCRPerPage.json"
+    txtV2 = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRTXT/v2FullOCR.txt"
+    processOCRMachine = processOCRTXTJSON(jsonV2, txtV2)
     processOCRMachine.jsonToTXT()
