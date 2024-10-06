@@ -1,4 +1,4 @@
-import json
+import json, os, re
 
 jsonContent = None
 decodeLibrary = {}
