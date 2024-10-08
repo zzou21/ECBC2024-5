@@ -15,6 +15,8 @@ class processOCRTXTJSON:
             for pageNum, pageContent in jsonOCRTextDict.items():
                 txtFile.write(pageContent)
 
+    # We do not yet have a TXT to JSON tool, as when converting from JPG to OCR-ed texts, we automatically stored the content in JSON format.
+    
 if __name__ == "__main__":
     # jsonFilePath = "C:/Users/zz341/Desktop/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json"
     # txtFilePath = "C:/Users/zz341/Desktop/ECBC2024-5/OCRTXT/v3FullOCR.txt"

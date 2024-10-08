@@ -1,29 +1,32 @@
 import PyPDF2
 
-# this function separates one large PDF into individual smaller chunks of PDFs.
-def split_pdf(input_pdf, pages_per_split):
-    # Open the original PDF
-    with open(input_pdf, 'rb') as pdf_file:
-        pdf_reader = PyPDF2.PdfReader(pdf_file)
-        total_pages = len(pdf_reader.pages)
-        split_count = total_pages // pages_per_split + (1 if total_pages % pages_per_split else 0)
+# this function separates one large PDF into individual smaller chunks of PDFs so that it will be friendlier for a user's local machine, if the local machine cannot handle as large of a PDF as, say, 800 pages long.
+class splitPDFIntoChunks:
+    def __init__ (self, inputPDFPathName, pagePerChunkInt):
+        self.inputPDFPathName = inputPDFPathName
+        self.pagePerChunkInt = pagePerChunkInt
 
-        print(total_pages)
-        print(split_count)
-        
-        for i in range(split_count):
-            pdf_writer = PyPDF2.PdfWriter()
-            start_page = i * pages_per_split
-            end_page = min(start_page + pages_per_split, total_pages)
-            
-            for page in range(start_page, end_page):
-                pdf_writer.add_page(pdf_reader.pages[page])
-            
-            output_pdf = f'/Users/Jerry/Desktop/SeparatedVA03/{i + 1}.pdf'
-            with open(output_pdf, 'wb') as output_file:
-                pdf_writer.write(output_file)
-            
-            print(f'Saved: {output_pdf}')
+    def splitPDF(self):
+        with open(self.inputPDFPathName, "rb") as rawPDFFile:
+            pdfReader = PyPDF2.PdfReader(rawPDFFile)
+            totalNumberOfPages = len(pdfReader.pages)
+            numOfChunks = totalNumberOfPages // self.pagePerChunkInt + (1 if totalNumberOfPages % self.pagePerChunkInt else 0)
+            for i in range(numOfChunks):
+                pdfWriter = PyPDF2.PdfWriter()
+                startPage = i * self.pagePerChunkInt
+                endPage = min(startPage + self.pagePerChunkInt, totalNumberOfPages)
+                
+                for page in range(startPage, endPage):
+                    pdfWriter.add_page(pdfReader.pages[page])
+                
+                outputChunk = f"/Users/Jerry/Desktop/SeparatedVA03/{i + 1}.pdf"
+                with open(outputChunk, 'wb') as out:
+                    pdfWriter.write(out)
+                
+                print(f"Save PDF chunk: {outputChunk}")
 
-rawFullPdf = '/Users/Jerry/Desktop/recordsofvirgini03virg.pdf'  # Replace with the path to your PDF
-split_pdf(rawFullPdf, 50)
+if __name__ == "__main__":
+    rawFullPdf = "/Users/Jerry/Desktop/recordsofvirgini03virg.pdf"
+    pagePerChunk = 50
+    PDFSplitMachine = splitPDFIntoChunks(rawFullPdf, pagePerChunk)
+    PDFSplitMachine.splitPDF()
