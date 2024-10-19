@@ -1,6 +1,8 @@
 import requests, json
+# Each time when running the search, do not forget to update the API and CSE keys and IDs under the main Python block.
 
-# Need to finish dump to JSON in processEachSearchName function
+
+# TO DO: Need to finish dump to JSON in processEachSearchName function
 class googleSearchMachine:
     def __init__ (self, queryList, apiKeyString, cseIDString, numResultsInt, storingSearchResultJson):
         self.queryList = queryList
@@ -68,8 +70,8 @@ class googleSearchMachine:
         self.processEachSearchName()
 
 if __name__ == "__main__":
-    API_KEY = "AIzaSyBuNkIdtQC-y-1bNxoB4_7RV9SpwgIvUkU" # personal!!!
-    CSE_ID = "704c915507a564a0c" #personal!!!
+    API_KEY = "" # personal!!!
+    CSE_ID = "" #personal!!!
     searchNames = ['Albert Einstein'] #store the names that need to be searched.
     numOfSearchResultsToStore = 10
     jsonSearchResultStorage = "C:/Users/zz341/Desktop/ECBC2024-5/MassGoogleSearchTools/vol3Namepg80-90SearchResultStorage.json" # use when using XR lab computer
