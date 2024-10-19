@@ -1,7 +1,7 @@
 # This program cleans the names between pg 80-90 on Records of the Virginia Company of London, Vol III. This is "A complete List in Alphabetical Order of the 'Adventurers to Virginia,' with the Several Amounts of Their Holding."
 
 # Task for the weekend of Oct 19: write a function that automatically searches up names in Google?
-import json
+import json, re
 
 class processVol3NameList:
     def __init__(self, vol3OCRedJsonPath, jsonOCRPageRange):
@@ -18,8 +18,18 @@ class processVol3NameList:
         # print(self.jsonOriginalContentStorage)
         # print((self.jsonOCRPageRange[0], self.jsonOCRPageRange[1] + 1))
         pagesCombinedListOriginalContent = [value for key, value in self.jsonOriginalContentStorage.items() if int(key) in range(self.jsonOCRPageRange[0], self.jsonOCRPageRange[1] + 1)]
-        for item in pagesCombinedListOriginalContent:
-            print(item)
+        cleanedNameList = []
+        for item in pagesCombinedListOriginalContent[:2]:
+            cleanedNameListOnePage = []
+            splitAtNewLine = item.split("\n")
+
+            for name in splitAtNewLine: # This function calls the people who have been separated using new lines are now reunited.
+                cleaningRegexNewSingleNames = re.sub(r"[^a-zA-Z\s*']", "", name)
+                cleaningSingleName = cleaningRegexNewSingleNames.strip()
+                cleaningSingleName #TO DO October 18, 2024. Finish cleaning names
+                
+                
+                print(f"Cleaned name: {cleaningRegexNewSingleNames}")
     
     def operations(self):
         self.openJson()
