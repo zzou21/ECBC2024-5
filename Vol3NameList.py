@@ -20,23 +20,29 @@ class processVol3NameList:
         pagesCombinedListOriginalContent = [value for key, value in self.jsonOriginalContentStorage.items() if int(key) in range(self.jsonOCRPageRange[0], self.jsonOCRPageRange[1] + 1)]
         cleanedNameList = []
         for item in pagesCombinedListOriginalContent[:2]:
-            cleanedNameListOnePage = []
             splitAtNewLine = item.split("\n")
 
             for name in splitAtNewLine: # This function calls the people who have been separated using new lines are now reunited.
                 cleaningRegexNewSingleNames = re.sub(r"[^a-zA-Z\s*']", "", name)
                 cleaningSingleName = cleaningRegexNewSingleNames.strip()
-                cleaningSingleName #TO DO October 18, 2024. Finish cleaning names
-                
-                
-                print(f"Cleaned name: {cleaningRegexNewSingleNames}")
+                replaceNameTitle = {"S*": "Sir", "S'": "Sir", "St": "Saint ", "S ": "Sir ", "' ": "", "'": ""}
+                for toBeReplaced, replacement in replaceNameTitle.items():
+                    if cleaningSingleName.startswith(toBeReplaced):
+                        cleaningSingleName = cleaningSingleName.replace(toBeReplaced, replacement)
+                if cleaningSingleName:
+                    filterKeywords = ["RECORDS OF THE VIRGINIA", "Adventurers to Virginia"]
+                    if all(keyword not in cleaningSingleName for keyword in filterKeywords):
+                        cleanedNameList.append(cleaningSingleName)
+        print(cleanedNameList)
+    
     
     def operations(self):
         self.openJson()
         self.cleanOCRText()
 
 if __name__ == "__main__":
-    vol3OCRedJsonPath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json"
+    # vol3OCRedJsonPath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json" #Use when using personal computer
+    vol3OCRedJsonPath = "C:/Users/zz341/Desktop/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json" #Use when suign XR lab computer
     jsonOCRPageRange = (106, 116) # This is the page number in JSON that records the relevant pages (pg 80-90).
     nameListProcessingMachine = processVol3NameList(vol3OCRedJsonPath, jsonOCRPageRange)
     nameListProcessingMachine.operations()
