@@ -33,9 +33,9 @@ class processVol3NameList:
                     filterKeywords = ["RECORDS OF THE VIRGINIA", "Adventurers to Virginia"]
                     if all(keyword not in cleaningSingleName for keyword in filterKeywords):
                         cleanedNameList.append(cleaningSingleName)
+        self.storeCleanedTextNames = cleanedNameList
         print(cleanedNameList)
-    
-    
+
     def operations(self):
         self.openJson()
         self.cleanOCRText()
