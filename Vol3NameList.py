@@ -30,21 +30,32 @@ class processVol3NameList:
                     if cleaningSingleName.startswith(toBeReplaced):
                         cleaningSingleName = cleaningSingleName.replace(toBeReplaced, replacement)
                 if cleaningSingleName:
-                    filterKeywords = ["RECORDS OF THE VIRGINIA", "Adventurers to Virginia"]
+                    filterKeywords = ["RECORDS OF THE VIRGINIA", "Adventurers to Virginia", "Left blank in manuscript", "berlen"]
                     if all(keyword not in cleaningSingleName for keyword in filterKeywords):
                         if len(cleaningSingleName) > 3:
                             cleanedNameList.append(cleaningSingleName)
-        # self.storeCleanedTextNames = cleanedNameList
+        self.storeCleanedTextNames = cleanedNameList
+        # print(len(cleanedNameList))
         return cleanedNameList
     
     def googleSearch(self, searchAPI, CSEID, numResults, searchStorageJson):
         googleSearchTool = googleSearchMachine(self.cleanOCRText(), searchAPI, CSEID, numResults, searchStorageJson)
         googleSearchTool.operations()
         print(f"Stored all search results in {searchStorageJson}")
+    
+    def nameAnalysis(self):
+        # This function is used to perform manual analysis of the composition of the anmes, such as the frequency of a title appearing, the frequency of a word, etc. User should add extra properties to this function as they deem fit.
+        keyTitleCounterDict = {"sir": 0, "capt": 0, "companie": 0, "saint": 0, "lord": 0, "ladie": 0}
+        for name in self.storeCleanedTextNames:
+            for key in keyTitleCounterDict.keys():
+                if key in name.lower():
+                    keyTitleCounterDict[key] += 1
+        print(keyTitleCounterDict)
 
     def operations(self):
         self.openJson()
         self.cleanOCRText()
+        self.nameAnalysis()
 
 if __name__ == "__main__":
     vol3OCRedJsonPath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json" #Use when using personal computer
@@ -56,4 +67,4 @@ if __name__ == "__main__":
     searchStorageJson = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/MassGoogleSearchTools/vol3Namepg80-90SearchResultStorage.json"
     nameListProcessingMachine = processVol3NameList(vol3OCRedJsonPath, jsonOCRPageRange)
     nameListProcessingMachine.operations()
-    nameListProcessingMachine.googleSearch(searchAPI, CSEID, numResults, searchStorageJson)
+    # nameListProcessingMachine.googleSearch(searchAPI, CSEID, numResults, searchStorageJson)
