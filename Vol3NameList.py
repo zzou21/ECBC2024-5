@@ -67,4 +67,4 @@ if __name__ == "__main__":
     searchStorageJson = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/MassGoogleSearchTools/vol3Namepg80-90SearchResultStorage.json"
     nameListProcessingMachine = processVol3NameList(vol3OCRedJsonPath, jsonOCRPageRange)
     nameListProcessingMachine.operations()
-    # nameListProcessingMachine.googleSearch(searchAPI, CSEID, numResults, searchStorageJson)
+    nameListProcessingMachine.googleSearch(searchAPI, CSEID, numResults, searchStorageJson)
