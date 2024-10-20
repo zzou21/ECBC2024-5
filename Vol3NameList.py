@@ -1,7 +1,7 @@
 # This program cleans the names between pg 80-90 on Records of the Virginia Company of London, Vol III. This is "A complete List in Alphabetical Order of the 'Adventurers to Virginia,' with the Several Amounts of Their Holding."
 
-# Task for the weekend of Oct 19: write a function that automatically searches up names in Google?
 import json, re
+from MassGoogleSearchTools.WebMassGoogleSearchForNames import googleSearchMachine
 
 class processVol3NameList:
     def __init__(self, vol3OCRedJsonPath, jsonOCRPageRange):
@@ -32,17 +32,28 @@ class processVol3NameList:
                 if cleaningSingleName:
                     filterKeywords = ["RECORDS OF THE VIRGINIA", "Adventurers to Virginia"]
                     if all(keyword not in cleaningSingleName for keyword in filterKeywords):
-                        cleanedNameList.append(cleaningSingleName)
-        self.storeCleanedTextNames = cleanedNameList
-        print(cleanedNameList)
+                        if len(cleaningSingleName) > 3:
+                            cleanedNameList.append(cleaningSingleName)
+        # self.storeCleanedTextNames = cleanedNameList
+        return cleanedNameList
+    
+    def googleSearch(self, searchAPI, CSEID, numResults, searchStorageJson):
+        googleSearchTool = googleSearchMachine(self.cleanOCRText(), searchAPI, CSEID, numResults, searchStorageJson)
+        googleSearchTool.operations()
+        print(f"Stored all search results in {searchStorageJson}")
 
     def operations(self):
         self.openJson()
         self.cleanOCRText()
 
 if __name__ == "__main__":
-    # vol3OCRedJsonPath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json" #Use when using personal computer
-    vol3OCRedJsonPath = "C:/Users/zz341/Desktop/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json" #Use when suign XR lab computer
+    vol3OCRedJsonPath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json" #Use when using personal computer
+    # vol3OCRedJsonPath = "C:/Users/zz341/Desktop/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json" #Use when suign XR lab computer
     jsonOCRPageRange = (106, 116) # This is the page number in JSON that records the relevant pages (pg 80-90).
+    searchAPI = "AIzaSyBuNkIdtQC-y-1bNxoB4_7RV9SpwgIvUkU"
+    CSEID = "504fc132f5b4c4b94"
+    numResults = 10
+    searchStorageJson = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/MassGoogleSearchTools/vol3Namepg80-90SearchResultStorage.json"
     nameListProcessingMachine = processVol3NameList(vol3OCRedJsonPath, jsonOCRPageRange)
     nameListProcessingMachine.operations()
+    nameListProcessingMachine.googleSearch(searchAPI, CSEID, numResults, searchStorageJson)
