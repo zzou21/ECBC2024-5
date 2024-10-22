@@ -70,8 +70,8 @@ class googleSearchMachine:
         self.addAllSearchResultsToJson()
 
 if __name__ == "__main__":
-    API_KEY = "AIzaSyBuNkIdtQC-y-1bNxoB4_7RV9SpwgIvUkU" # personal!!! This is for Google Python API access key
-    CSE_ID = "704c915507a564a0c" #personal!!! CSE: Custom search engine
+    API_KEY = "" # personal!!! This is for Google Python API access key
+    CSE_ID = "" #personal!!! CSE: Custom search engine
     searchNames = ["Albert Einstein", "Rodger Federer"] #store the names that need to be searched.
     numOfSearchResultsToStore = 10
     jsonSearchResultStorage = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/MassGoogleSearchTools/vol3Namepg80-90SearchResultStorage.json" # use when using personal computer

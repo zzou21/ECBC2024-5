@@ -61,8 +61,8 @@ if __name__ == "__main__":
     vol3OCRedJsonPath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json" #Use when using personal computer
     # vol3OCRedJsonPath = "C:/Users/zz341/Desktop/ECBC2024-5/OCRJSON/Vol3StoreOCRPerPage.json" #Use when suign XR lab computer
     jsonOCRPageRange = (106, 116) # This is the page number in JSON that records the relevant pages (pg 80-90).
-    searchAPI = "AIzaSyBuNkIdtQC-y-1bNxoB4_7RV9SpwgIvUkU"
-    CSEID = "504fc132f5b4c4b94"
+    searchAPI = ""
+    CSEID = ""
     numResults = 10
     searchStorageJson = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/MassGoogleSearchTools/vol3Namepg80-90SearchResultStorage.json"
     nameListProcessingMachine = processVol3NameList(vol3OCRedJsonPath, jsonOCRPageRange)
