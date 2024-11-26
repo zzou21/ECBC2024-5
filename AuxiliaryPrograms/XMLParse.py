@@ -38,7 +38,7 @@ class xmlParse:
 
 
 if __name__ == "__main__":
-    xmlFilePath = "/Users/Jerry/Desktop/A00002.P4.xml"
+    xmlFilePath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/AuxiliaryPrograms/testTraversal(A00002.P4).xml"
     contentStoragePath = ""
     xmlTagsToSearchList = ["NOTE", "PUBLISHER"]
     xmlTraverseMachine = xmlParse(xmlFilePath, contentStoragePath)
