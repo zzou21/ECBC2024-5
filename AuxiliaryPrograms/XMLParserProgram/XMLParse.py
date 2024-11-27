@@ -12,8 +12,13 @@ class xmlParse:
         storeContentDictionary = {xmlTagToSearch: [] for xmlTagToSearch in xmlTagsToSearchList}
         for xmlTagToSearch in xmlTagsToSearchList:
             for element in root.findall(f".//{xmlTagToSearch}"):
-                print(element.text)
+                # print(element.text)
                 storeContentDictionary[xmlTagToSearch].append(element.text)
+
+
+            # for element in root.iter(xmlTagToSearch):
+            #     print(element.text)
+
         print(storeContentDictionary)
 
 
@@ -36,6 +41,12 @@ class xmlParse:
             storeContentDictionary[xmlTag] = temporaryXmlTagHolderList
         print(storeContentDictionary)
 
+    # Method 3: "untangle" library: not usable with EEBO.
+    def usingUntangle(self):
+        parsedDictionary = untangle.parse(self.xmlFilePath)
+        print(parsedDictionary)
+
+
 
 if __name__ == "__main__":
     xmlFilePath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/AuxiliaryPrograms/testTraversal(A00002.P4).xml"
@@ -44,3 +55,4 @@ if __name__ == "__main__":
     xmlTraverseMachine = xmlParse(xmlFilePath, contentStoragePath)
     # xmlTraverseMachine.traverseXMLDataTree(xmlTagsToSearchList)
     # xmlTraverseMachine.recursiveTraverseRoot(xmlTagsToSearchList)
+    xmlTraverseMachine.usingUntangle()
