@@ -16,6 +16,7 @@ class PDFtoIndividualImages:
         for pdf in os.listdir(pdfFolderPath):
             if pdf.endswith(".pdf"):
                 separatedPDFsList.append(pdf)
+        print(separatedPDFsList)
         sortingSeparatedPDFList = sorted(separatedPDFsList, key = lambda x: int(x.split(".")[0]))
         for index, pdf in enumerate(sortingSeparatedPDFList):
             sortingSeparatedPDFList[index] = os.path.join(pdfFolderPath, pdf)
@@ -47,8 +48,8 @@ class PDFtoIndividualImages:
                 startingPage += totalPages
 
 if __name__ == "__main__":
-    pdfFolderPath = "/Users/Jerry/Desktop/SeparatedVA03"
-    imageFolderPath = "/Users/Jerry/Desktop/VARecords3"
+    pdfFolderPath = "/Users/Jerry/Desktop/BassConnections2024-5/VARecordsPDF/SeparatedVA01"
+    imageFolderPath = "/Users/Jerry/Desktop/BassConnections2024-5/VARecordsPDF/SinglePageVARecords1"
     imageResolution = 300
     PDFtoIndImages = PDFtoIndividualImages(pdfFolderPath, imageFolderPath, imageResolution)
     PDFtoIndImages.PDFtoSeparatedPDFs()

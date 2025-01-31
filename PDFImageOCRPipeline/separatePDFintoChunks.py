@@ -19,14 +19,14 @@ class splitPDFIntoChunks:
                 for page in range(startPage, endPage):
                     pdfWriter.add_page(pdfReader.pages[page])
                 
-                outputChunk = f"/Users/Jerry/Desktop/SeparatedVA03/{i + 1}.pdf"
+                outputChunk = f"/Users/Jerry/Desktop/BassConnections2024-5/VARecordsPDF/SeparatedVA{i + 1}.pdf"
                 with open(outputChunk, 'wb') as out:
                     pdfWriter.write(out)
                 
                 print(f"Save PDF chunk: {outputChunk}")
 
 if __name__ == "__main__":
-    rawFullPdf = "/Users/Jerry/Desktop/recordsofvirgini03virg.pdf"
+    rawFullPdf = "/Users/Jerry/Desktop/BassConnections2024-5/VARecordsPDF/recordsofvirgini01virg.pdf"
     pagePerChunk = 50
     PDFSplitMachine = splitPDFIntoChunks(rawFullPdf, pagePerChunk)
     PDFSplitMachine.splitPDF()
