@@ -27,7 +27,6 @@ class tesseractOCRSinglePageVirginiaRecord:
                 pageNumber = int(match.group())
                 print(f"Currnetly OCRing page {pageNumber}")
                 OCRTextPerPage[pageNumber] = text
-        print(OCRTextPerPage)
 
         with open(self.jsonStoragePath, "w") as file:
             json.dump(OCRTextPerPage, file, indent=4)
@@ -38,7 +37,7 @@ class tesseractOCRSinglePageVirginiaRecord:
         self.tesseractOCRAndStorage()
 
 if __name__ == "__main__":
-    singleImageDirectoryPath = "/Users/Jerry/Desktop/teseto"
-    jsonStoragePath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/testocr.json"
+    singleImageDirectoryPath = "/Users/Jerry/Desktop/BassConnections2024-5/OCR Training"
+    jsonStoragePath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/OCR10imageTraining.json"
     tesseractMachine = tesseractOCRSinglePageVirginiaRecord(singleImageDirectoryPath, jsonStoragePath)
     tesseractMachine.operations()
