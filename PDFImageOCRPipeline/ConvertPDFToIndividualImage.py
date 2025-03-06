@@ -16,8 +16,8 @@ class PDFtoIndividualImages:
         for pdf in os.listdir(pdfFolderPath):
             if pdf.endswith(".pdf"):
                 separatedPDFsList.append(pdf)
-        print(separatedPDFsList)
         sortingSeparatedPDFList = sorted(separatedPDFsList, key = lambda x: int(x.split(".")[0]))
+        print(f"PDF files about to be separated into individual images: {sortingSeparatedPDFList}")
         for index, pdf in enumerate(sortingSeparatedPDFList):
             sortingSeparatedPDFList[index] = os.path.join(pdfFolderPath, pdf)
         self.sortedIndividualPDFPaths = sortingSeparatedPDFList # a list of sorted separated PDFs.
