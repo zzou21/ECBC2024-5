@@ -37,7 +37,7 @@ class tesseractOCRSinglePageVirginiaRecord:
         self.tesseractOCRAndStorage()
 
 if __name__ == "__main__":
-    singleImageDirectoryPath = "/Users/Jerry/Desktop/BassConnections2024-5/OCR Training"
-    jsonStoragePath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/OCR10imageTraining.json"
+    singleImageDirectoryPath = "/Users/Jerry/Desktop/BassConnections2024-5/VARecordsPDF/SinglePageVARecords1"
+    jsonStoragePath = "/Users/Jerry/Desktop/BassConnections2024-5/ECBC2024-5/OCRJSON/Vol1StoreOCRPerPage.json"
     tesseractMachine = tesseractOCRSinglePageVirginiaRecord(singleImageDirectoryPath, jsonStoragePath)
     tesseractMachine.operations()
