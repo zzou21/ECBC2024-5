@@ -1,3 +1,6 @@
+# Originally written by Will Shaw.
+# Edited and revised by ECBC 2024-5 team.
+
 import openai, json
 
 client = openai.OpenAI(api_key="[-YOUR-API-KEY-HERE-]")
