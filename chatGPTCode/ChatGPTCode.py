@@ -1,7 +1,7 @@
 # Originally written by Will Shaw.
 # Edited and revised by ECBC 2024-5 team.
 
-import openai, json
+import openai, json, os
 
 client = openai.OpenAI(api_key="[-YOUR-API-KEY-HERE-]")
 
@@ -169,18 +169,24 @@ def correct_transcription(ocr_text):
     return corrected_text.strip()
 
 if __name__ == "__main__":
-    uncleanedText = "allFourVCLCombinedPerPage.json"
+    uncleanedTextFolder = "splittedJson"
     cleanedTextStorage = "finalStorageJson.json"
+
+    for oneFile in os.listdir(uncleanedTextFolder):
+        if oneFile.endswith(".json"):
+            jsonFileNamePath = os.path.join(uncleanedTextFolder, oneFile)
+            with open(jsonFileNamePath, "r", encoding="utf-8") as uncleanedTextJson:
+                uncleanedTextDict = json.load(uncleanedTextJson)
+            
+            with open(cleanedTextStorage, "r", encoding="utf-8") as cleanedTextJson:
+                cleanedTextDict = json.load(cleanedTextJson)
     
-    with open(uncleanedText, "r", encoding="utf-8") as uncleanedTextJson:
-        uncleanedTextDict = json.load(uncleanedTextJson)
+            for pageNum, pageContent in uncleanedTextDict.items():
+                print(f"Processing page {pageNum} starting with {pageContent[0:10]} in file: {oneFile}...")
+                cleanedText = correct_transcription(pageContent)
+                cleanedTextDict[pageNum] = cleanedText
     
-    finalCleanedStorageDict = {}
-    for pageNum, pageContent in uncleanedTextDict.items():
-        print(f"Processing page {pageNum} starting with {pageContent[0:10]}...")
-        cleanedText = correct_transcription(pageContent)
-        finalCleanedStorageDict[pageNum] = cleanedText
-    
-    with open(cleanedTextStorage, "w", encoding="utf-8") as storageJSON:
-        json.dump(finalCleanedStorageDict, storageJSON, indent=4)
+            with open(cleanedTextStorage, "w", encoding="utf-8") as storageJSON:
+                json.dump(cleanedTextDict, storageJSON, indent=4)
+
     print("Finished processing all pages.")
